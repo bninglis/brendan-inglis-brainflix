@@ -1,4 +1,5 @@
 import React from 'react';
+import './VideoWindow.scss';
 
 function VideoWindow(props) {
     return (

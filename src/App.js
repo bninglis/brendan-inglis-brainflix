@@ -1,4 +1,5 @@
-import './App.css';
+import './App.scss';
+import './src/styles/styles.scss';
 import Header from '.components/Header/Header';
 import Details from '.components/Details/Details';
 import VideoWindow from './components/VideoWindow/VideoWindow';

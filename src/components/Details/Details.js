@@ -1,4 +1,5 @@
 import React from 'react';
+import './Details.scss'
 
 function Details() {
     return (

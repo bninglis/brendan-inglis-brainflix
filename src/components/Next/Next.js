@@ -1,4 +1,5 @@
 import React from 'react';
+import './Next.scss';
 import NextItem from './NextItem/NextItem'
 
 function Next(props) {
