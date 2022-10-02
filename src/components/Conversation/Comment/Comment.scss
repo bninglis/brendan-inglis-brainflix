@@ -1,2 +1,60 @@
 @forward "../../../styles/styles.scss";
 @use "../../../styles/styles.scss" as *;
+
+
+.comment {
+    display: flex;
+    width: 100%;
+    border-bottom: 0.0625rem solid $MERCURY;
+
+    &__pfp{
+        @include component-margin(1,1,1);
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        @include tablet-plus {
+
+        }
+    }
+
+    &__button {
+        @include component-margin(1,0,1);
+
+        @include tablet-plus {
+            margin-top: -2.5rem;
+            align-self: flex-end;
+        }
+    }
+}
+
+.post{
+    &__label{
+        &--input{
+            @include mobile{
+                display: none;
+            }
+        }
+        &--textarea{
+            @include tablet-plus{
+                display: none;
+            }
+        }
+    }
+
+    &__input{
+        margin-right: 10.625rem;
+        @include mobile{
+            display:none;
+        }
+    }
+
+    &__textarea{
+        @include tablet-plus{
+            display: none;
+        }
+    }
+}

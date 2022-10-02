@@ -1,2 +1,67 @@
 @forward "../../styles/styles.scss";
 @use "../../styles/styles.scss" as *;
+
+.details{
+    border-bottom:  0.0625rem solid $MERCURY;
+    @include component-margin(1,0,1,1);
+
+    display: flex;
+    @include mobile{
+        border-top:  0.0625rem solid $MERCURY;
+        @include component-margin(1,1,1,1);
+        @include component-padding(1,0,1);
+    }
+    @include tablet-plus{
+        padding-bottom: .75rem;
+    }
+
+    &__static{
+        display:flex;
+        flex-direction: column;
+        width:50%;
+
+        @include tablet-plus{
+            flex-direction: row;
+        }
+    }
+
+    &__by{
+        font-weight: 700;
+        @include component-margin(0,1);
+        @include mobile{
+                    @include component-margin(0,0,1)
+        }
+    }
+
+    &__date,&__likes,&__views{
+        color: $SILVER;
+    }
+
+    &__dynamic{
+        display:flex;
+        flex-direction: column;
+
+        @include tablet-plus{
+            width: 50%;
+            flex-direction: row;
+            justify-content: right;
+        }
+    }
+
+    &__container{
+        display: flex;
+        @include component-margin(0,1);
+        align-items: center;
+        @include mobile {
+            @include component-margin(0,0,1);
+        }
+    }
+
+    &__icon{
+        margin-right: .5rem;
+    }
+
+    &__description{
+        @include component-margin(0,1,1,1);
+    }
+}

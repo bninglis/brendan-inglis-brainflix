@@ -6,10 +6,10 @@ import "../../styles/styles.scss";
 
 function Conversation() {
     return (
-        <div classNameName="conversation">
+        <div className="conversation">
             <p className="conversation__count">3 Comments</p>
             <Comment />
-            <ol classNameName="discussion">
+            <ol className="discussion">
                 <PostedComment />
                 <PostedComment />
                 <PostedComment />

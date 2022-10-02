@@ -1,2 +1,32 @@
 @forward "../../../styles/styles.scss";
 @use "../../../styles/styles.scss" as *;
+
+.next{
+    &__item{
+        @include component-margin(1,0,1);
+        display: flex;
+    }
+
+    &__thumbnail{
+        width: 8.5rem;
+        height: 100%;
+        object-fit: cover;
+        border-radius: $RADIUS;
+        align-self: center;
+    }
+
+    &__text{
+        @include component-margin(0,0,0,1);
+        margin-top: .25rem;
+        margin-bottom: .25rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__title{
+        color: $BRAIN_FLIX_BLACK;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+}

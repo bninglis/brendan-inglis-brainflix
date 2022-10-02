@@ -1,2 +1,11 @@
 @forward "../../styles/styles.scss";
 @use "../../styles/styles.scss" as *;
+
+.conversation{
+    @include component-margin(1,1,1,1);
+
+    &__count{
+        font-weight: 700;
+        @include component-margin(0,0,1)
+    }
+}

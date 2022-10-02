@@ -1,12 +1,15 @@
 import React from 'react';
 import './PostedComment.scss';
 import "../../../styles/styles.scss";
+import mohanMuruge from '../../../assets/images/Mohan-muruge.jpg';
 
 function PostedComment(props) {
     return (
         <li className="posted-comment">
             <div className="posted-comment__sidebar">
-                <img className="posted-comment__pfp pfp" src="blank" alt="user profile"/>
+                <div class="pfp posted-comment__pfp posted-comment__pfp--background">
+                    <img className="posted-comment__pfp pfp" src={mohanMuruge} alt="user profile"/>
+                </div>
             </div>
             <div className="posted-comment__text">
                 <div className="posted-comment__header">
