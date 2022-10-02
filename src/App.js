@@ -1,9 +1,9 @@
 import './App.scss';
-import './src/styles/styles.scss';
-import Header from '.components/Header/Header';
-import Details from '.components/Details/Details';
+import './styles/styles.scss';
+import Header from './components/Header/Header';
+import Details from './components/Details/Details';
 import VideoWindow from './components/VideoWindow/VideoWindow';
-import Conversation from './components/Conversation';
+import Conversation from './components/Conversation/Conversation';
 import Next from './components/Next/Next';
 
 function App() {
