@@ -6,7 +6,7 @@ import NextItem from './NextItem/NextItem'
 function Next(props) {
     return (
         <div className="next">
-            <h3 className="next__title">NEXT VIDEOS</h3>
+            <h3 className="next__subheader">NEXT VIDEOS</h3>
             <ul className="next__list">
                 <NextItem />
                 <NextItem />

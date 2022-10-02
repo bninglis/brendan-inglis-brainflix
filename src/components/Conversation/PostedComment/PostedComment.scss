@@ -5,6 +5,16 @@
     display: flex;
     border-bottom: 0.0625rem solid $MERCURY;
 
+    @include desktop{
+        @include component-padding(0,1);
+    }
+
+    &:last-of-type {
+        @include desktop{
+            border-bottom: none;
+        }
+    }
+
     &__pfp{
         @include component-margin(1,1,1);
         object-fit: contain;

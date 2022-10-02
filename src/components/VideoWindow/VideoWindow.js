@@ -1,6 +1,9 @@
 import React from 'react';
 import './VideoWindow.scss';
 import "../../styles/styles.scss";
+import playIcon from "../../assets/images/play.svg";
+import fullscreenIcon from "../../assets/images/fullscreen.svg";
+import volumeIcon from "../../assets/images/volume_up.svg";
 
 function VideoWindow(props) {
     return (
@@ -11,7 +14,7 @@ function VideoWindow(props) {
                 </video>
                 <div className="video__controls">
                     <button className="video__button video__button--play">
-                        <img src="./assets/images/play.svg" alt="" srcset=""/>
+                        <img src={playIcon} alt="play icon" />
                     </button>
                     <div className="video__timeline">
                         <div className="video__progressbar"></div>
@@ -21,15 +24,14 @@ function VideoWindow(props) {
                     </div>
                     <div className="video__volumefullscreen">
                         <button className="video__button video__button--fullscreen">
-                            <img src="./assets/images/fullscreen.svg" alt="" srcset=""/>
+                            <img src={fullscreenIcon} alt="fullscreen icon" />
                         </button>
                         <button className="video__button video__button--volume">
-                            <img src="./assets/images/volume_up.svg" alt="" srcset=""/>
+                            <img src={volumeIcon} alt="volume icon" />
                         </button>
                     </div>
                 </div>
             </div>
-            <h1 className="video__title">BMX Rampage: 2021 Highlights</h1>
         </div>
     );
 }

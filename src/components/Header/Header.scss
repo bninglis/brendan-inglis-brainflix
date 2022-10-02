@@ -1,11 +1,13 @@
 @forward "../../styles/styles.scss";
 @use "../../styles/styles.scss" as *;
 
-header {
+.header {
     @include component-padding(1,1,1,1);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: $DESKTOP_COLUMN_WIDTH;
 
     @include tablet-plus{
         justify-content: space-between;
@@ -15,14 +17,12 @@ header {
 }
 
 .logo{
-
-
-    &__image{
+    @include mobile{
         @include component-margin(0,0,1,0);
         line-height: 0;
         display: flex;
         align-items: center;
-    
+
         @include tablet-plus{
             align-items: stretch;
         }
@@ -30,6 +30,7 @@ header {
         align-items: center;
     }
 }
+
 
 .actions {
     display: flex;

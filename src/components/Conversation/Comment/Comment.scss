@@ -7,6 +7,10 @@
     width: 100%;
     border-bottom: 0.0625rem solid $MERCURY;
 
+    @include desktop{
+        @include component-padding(0,1);
+    }
+
     &__pfp{
         @include component-margin(1,1,1);
     }

@@ -3,16 +3,25 @@
 
 .details{
     border-bottom:  0.0625rem solid $MERCURY;
-    @include component-margin(1,0,1,1);
+    @include component-margin(1,1,1,1);
 
     display: flex;
     @include mobile{
         border-top:  0.0625rem solid $MERCURY;
         @include component-margin(1,1,1,1);
-        @include component-padding(1,0,1);
+        @include component-padding(1);
     }
     @include tablet-plus{
         padding-bottom: .75rem;
+    }
+
+    @include desktop{
+        margin-right:0;
+        @include component-padding(0,1);
+    }
+
+    &__title{
+        @include component-margin(0,1,0,1);
     }
 
     &__static{
@@ -50,11 +59,14 @@
 
     &__container{
         display: flex;
-        @include component-margin(0,1);
         align-items: center;
         @include mobile {
             @include component-margin(0,0,1);
         }
+    }
+
+    &__views{
+        @include component-margin(0,1);
     }
 
     &__icon{

@@ -1,10 +1,13 @@
 import React from 'react';
 import './Details.scss'
 import "../../styles/styles.scss";
+import viewsIcon from "../../assets/images/views.svg";
+import likesIcon from "../../assets/images/likes.svg";
 
 function Details() {
     return (
         <div>
+            <h1 className="details__title">BMX Rampage: 2021 Highlights</h1>
             <div className="details">
                 <div className="details__static">
                     <p className="details__by">By Red Crow</p>
@@ -12,10 +15,10 @@ function Details() {
                 </div>
                 <div className="details__dynamic">
                     <div className="details__container">
-                        <img src="./assets/images/views.svg" alt="" className="details__icon icon"/><p className="details__views">1,001,023</p>
+                        <img src={viewsIcon} alt="" className="details__icon icon"/><p className="details__views">1,001,023</p>
                     </div>
                     <div className="details__container">
-                        <img src="./assets/images/likes.svg" alt="" className="details__icon icon"/><p className="details__likes">110,985</p>
+                        <img src={likesIcon} alt="" className="details__icon icon"/><p className="details__likes">110,985</p>
                     </div>
                 </div>
             </div>

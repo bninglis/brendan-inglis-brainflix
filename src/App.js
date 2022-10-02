@@ -11,9 +11,15 @@ function App() {
     <div className="rootdiv">
       <Header />
       <VideoWindow />
-      <Details />
-      <Conversation />
-      <Next />
+      <div class="misc">
+        <div class="misc__column">
+          <Details />
+          <Conversation />
+        </div>
+        <div class="misc__aside">
+          <Next />
+        </div>
+      </div>
     </div>
   );
 }
