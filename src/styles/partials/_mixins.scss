@@ -1,0 +1,188 @@
+@forward 'variables';
+
+@use 'variables' as *;
+
+// Default style mixins
+
+@mixin page-header-base ($page-header-font-size, $page-header-line-height, $color:true) {
+    font-size: $page-header-font-size;
+    line-height: $page-header-line-height;
+    font-weight: 700;
+    @if $color {
+        color: $BRAIN_FLIX_BLACK;
+    }
+}
+
+@mixin section-header-base ($section-header-font-size, $section-header-line-height, $color:true) {
+    font-size: $section-header-font-size;
+    line-height: $section-header-line-height;
+    font-weight: 700;
+    @if $color {
+        color: $BRAIN_FLIX_BLACK;
+    }
+}
+
+@mixin subheader-base ($subheader-font-size, $subheader-line-height, $color:true) {
+    font-size: $subheader-font-size;
+    line-height: $subheader-line-height;
+    font-weight: 700;
+    @if $color {
+        color: $BRAIN_FLIX_BLACK;
+    }
+}
+
+@mixin body-copy-base ($body-copy-font-size, $body-copy-line-height, $color:true) {
+    font-size: $body-copy-font-size;
+    line-height: $body-copy-line-height;
+    font-weight: 400;
+    @if $color {
+        color: $BRAIN_FLIX_BLACK;
+    }
+}
+
+@mixin labels-and-buttons-base ($labels-and-buttons-font-size, $labels-and-buttons-line-height, $color:true) {
+    font-size: $labels-and-buttons-font-size;
+    line-height: $labels-and-buttons-line-height;
+    font-weight: 700;
+    @if $color {
+        color: $BRAIN_FLIX_BLACK;
+    }
+}
+
+@mixin component-padding-base ($padding,$top,$right,$bottom,$left) {
+    @if $top == 1 {
+        padding-top: $padding;
+    }
+    @if $right == 1 {
+        padding-right: $padding;
+    }
+    @if $bottom == 1 {
+        padding-bottom: $padding;
+    }
+    @if $left == 1 {
+        padding-left: $padding;
+    }
+}
+
+@mixin component-margin-base ($margin,$top,$right,$bottom,$left) {
+    @if $top == 1 {
+        margin-top: $margin;
+    }
+    @if $right == 1 {
+        margin-right: $margin;
+    }
+    @if $bottom == 1 {
+        margin-bottom: $margin;
+    }
+    @if $left == 1 {
+        margin-left: $margin;
+    }
+}
+
+// Media Query Mixins
+
+@mixin mobile {
+    @media screen and (max-width: 767px) {
+        @content
+    }
+};
+
+@mixin tablet {
+    @media screen and (min-width: 768px) and (max-width: 1279px) {
+        @content
+    }
+};
+
+@mixin tablet-plus {
+    @media screen and (min-width: 768px)  {
+        @content
+    }
+};
+
+@mixin desktop {
+    @media screen and (min-width: 1280px)  {
+        @content
+    }
+};
+
+// Media Query Default Styles
+
+
+@mixin page-header($color:true) {
+    @include mobile {
+        @include page-header-base($MPAGE_HEADER_FONTSIZE, $MPAGE_HEADER_LINEHEIGHT, $color);
+    }
+    @include tablet-plus {
+        @include page-header-base($MPAGE_HEADER_FONTSIZE, $MPAGE_HEADER_LINEHEIGHT, $color);
+    }
+}
+
+@mixin section-header($color:true) {
+    @include mobile {
+        @include section-header-base($MSECTION_HEADER_FONTSIZE, $MSECTION_HEADER_LINEHEIGHT, $color);
+    }
+    @include tablet-plus {
+        @include section-header-base($TDSECTION_HEADER_FONTSIZE, $TDSECTION_HEADER_LINEHEIGHT, $color);
+    }
+}
+
+@mixin subheader($color:true) {
+    @include mobile {
+        @include subheader-base($MSUBHEADER_FONTSIZE, $MSUBHEADER_LINEHEIGHT, $color);
+    }
+    @include tablet-plus {
+        @include subheader-base($TDSUBHEADER_FONTSIZE, $TDSUBHEADER_LINEHEIGHT, $color);
+    }
+}
+
+@mixin body-copy($color:true) {
+    @include mobile {
+        @include body-copy-base($MBODY_COPY_FONTSIZE, $MBODY_COPY_LINEHEIGHT, $color);
+    }
+    @include tablet-plus {
+        @include body-copy-base($TDBODY_COPY_FONTSIZE, $TDBODY_COPY_LINEHEIGHT, $color);
+    }
+}
+
+@mixin labels-and-buttons($color:true) {
+    @include mobile {
+        @include labels-and-buttons-base($MLABELS_BUTTONS_FONTSIZE,$MLABELS_BUTTONS_LINEHEIGHT,$color);
+    }
+    @include tablet-plus {
+        @include labels-and-buttons-base($TDLABELS_BUTTONS_FONTSIZE,$TDLABELS_BUTTONS_LINEHEIGHT,$color);
+    }
+}
+
+@mixin component-padding($top:0, $right:0, $bottom:0, $left:0) {
+    @include mobile {
+        @include component-padding-base($MPADDING,$top,$right,$bottom,$left);
+    }
+    @include tablet-plus {
+        @include component-padding-base($TDPADDING,$top,$right,$bottom,$left);
+    }
+}
+
+@mixin component-margin($top:0, $right:0, $bottom:0, $left:0) {
+    @include mobile {
+        @include component-margin-base($MPADDING,$top,$right,$bottom,$left);
+    }
+    @include tablet-plus {
+        @include component-margin-base($TDPADDING,$top,$right,$bottom,$left);
+    }
+}
+
+@mixin input-fields {
+    padding: 0.75rem;
+    border: 0.0625rem solid $MERCURY;
+    border-radius: $RADIUS;
+    color: $BRAIN_FLIX_BLACK;
+    outline: none;
+
+    @include tablet-plus{
+        padding: 1rem;
+    }
+
+    &:focus {
+        border: 0.125rem solid $BRAIN_FLIX_BLUE;
+    }
+}
