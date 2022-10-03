@@ -128,8 +128,10 @@ label {
 
 video {
     width: 100%;
-    height: calc(.5625*100%);
+    height: calc(.5625*98vw);
     max-width: 45rem;
+    object-fit: cover;
+    max-height: 25.3125rem;
 
     @include tablet-plus{
         @include component-margin(0,1,0,1);

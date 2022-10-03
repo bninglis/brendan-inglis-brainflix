@@ -3,6 +3,7 @@ import './NextItem.scss';
 import "../../../styles/styles.scss";
 
 function NextItem(props) {
+    // simple info pulled from the list of videos.json with the current video filtered from it
     const {title, id, channel, image} = props.video;
     const selectVideo = props.selectVideo;
     return (

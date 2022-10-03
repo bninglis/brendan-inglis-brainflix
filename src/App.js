@@ -10,20 +10,20 @@ import videoDetailsArray from './data/video-details.json';
 import {useState} from 'react';
 
 function App() {
-
+// initialize the App with the video from the mockups
   const [selectedVideo, setSelectedVideo] = useState(videoArray[0]);
   const [selectedVideoDetails, setSelectedVideoDetails] = useState(videoDetailsArray[0]);
   const videoList = videoArray;
   const videoDetailsList = videoDetailsArray;
 
-  
+  // event handler finds the video id and grabs boths the basic info and the video details
   const handleSelectVideo = (selectedId) => {
     const foundVideo = videoList.find((video) => selectedId === video.id);
     const foundVideoDetails = videoDetailsList.find((video) => selectedId === video.id);
     setSelectedVideo(foundVideo);
     setSelectedVideoDetails(foundVideoDetails);
   }
-
+// put a list to the next videos that has the mounted video filtered from it 
   const filteredArray = videoList.filter((video)=> video.id !== selectedVideo.id)
 
   return (

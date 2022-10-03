@@ -1,3 +1,5 @@
+// returns in plain english the time since a UTC timestamp 
+
 export default function timeSinceComments (timestamp) {
     let timeSince = Date.now() - timestamp;
     while (timeSince < 1){timeSince = 1};

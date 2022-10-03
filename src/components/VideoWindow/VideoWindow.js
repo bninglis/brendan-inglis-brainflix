@@ -6,7 +6,7 @@ import fullscreenIcon from "../../assets/images/fullscreen.svg";
 import volumeIcon from "../../assets/images/volume_up.svg";
 
 function VideoWindow(props) {
-    const {image: selectedVideoPoster,id: selectedVideoId} = props.selectedVideo;
+    const {image: selectedVideoPoster,} = props.selectedVideo;
     const {duration: selectedVideoDuration} = props.selectedVideoDetails;
 
     return (
