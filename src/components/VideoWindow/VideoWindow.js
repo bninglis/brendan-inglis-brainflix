@@ -6,11 +6,15 @@ import fullscreenIcon from "../../assets/images/fullscreen.svg";
 import volumeIcon from "../../assets/images/volume_up.svg";
 
 function VideoWindow(props) {
+    const {image: selectedVideoPoster,id: selectedVideoId} = props.selectedVideo;
+    const {duration: selectedVideoDuration} = props.selectedVideoDetails;
+
     return (
         <div>
             <div className="video__window">
-                <video nocontrols id="video">
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                <video controls={false} id="video" poster={selectedVideoPoster}>
+                    <source src="blank" />
+                    <p>Your browser doesn't support HTML video</p>
                 </video>
                 <div className="video__controls">
                     <button className="video__button video__button--play">
@@ -19,7 +23,7 @@ function VideoWindow(props) {
                     <div className="video__timeline">
                         <div className="video__progressbar"></div>
                         <div className="video__time">
-                            <p className="video__currenttime">0:00/</p><p className="video__duration">4:04</p>
+                            <p className="video__currenttime">0:00/</p><p className="video__duration">{selectedVideoDuration}</p>
                         </div>
                     </div>
                     <div className="video__volumefullscreen">

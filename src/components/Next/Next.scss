@@ -5,8 +5,11 @@
     @include component-margin(1,1,1,1);
     height: 100%;
 
+    @include desktop{
+        margin-right: 0;
+    }
+
     &__subheader{
-        @include component-margin(0,0,1);
         color: $SILVER;
 
         @include desktop{
