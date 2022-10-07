@@ -5,11 +5,14 @@ import brainFlixLogo from "../../assets/images/BrainFlix-logo.svg";
 import searchIcon from "../../assets/images/search.svg";
 import uploadLogo from "../../assets/images/upload.svg";
 import mohanMuruge from "../../assets/images/Mohan-muruge.jpg"
+import {Link} from "react-router-dom";
 
 function Header() {
     return (<header>
             <div className='header'>
-                <img src={brainFlixLogo} alt="BrainFlix logo" className="logo"/>
+                <Link to={`/`}>
+                    <img src={brainFlixLogo} alt="BrainFlix logo" className="logo"/>
+                </Link>
                 <div className="actions">
                     <div className="actions__search">
                         <img src={searchIcon} className="actions__icon icon" alt="search icon"/>

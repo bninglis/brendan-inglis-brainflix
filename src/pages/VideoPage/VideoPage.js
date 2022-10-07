@@ -58,38 +58,35 @@ const SAMPLE_ID = "84e96018-4022-434e-80bf-000ce4cd12b8"
 
 
 export default function VideoPage() {
-    const {id: videoId} = useParams();
-    console.log('videoId:',videoId)
-    const DETAILS_CALL = `${BASE_URL}/videos/${videoId}?api_key=${API_KEY}`
-    const getVideo = () => {
-        axios.get(`${BASE_URL}/videos/${videoId}?api_key=${API_KEY}`).then((response) =>{
+    let {id: videoId} = useParams();
+    const detailsCall = (id)=>{return `${BASE_URL}/videos/${id}?api_key=${API_KEY}`}
+    const getVideo = (id) => {
+        axios.get(detailsCall(id)).then((response) =>{
             setSelectedVideoDetails(response.data)
         })
     }
 
     useEffect(() => {
+        if (!videoId) {
+            axios.get(LIST_CALL).then((listResponse) => {
+                setVideoList(listResponse.data.slice(1))
+                return listResponse;
+            }).then((response) => {
+                console.log(response)
+                // console.log(data)
+                getVideo(response.data[0].id)
+                })
+        } else {
         axios.get(LIST_CALL).then((response) => {
             setVideoList(response.data)
         })
-        .then((response) => {
-            console.log('videoList:',videoList)
-        })
-        getVideo();
-    },[]);
-    // initialize the App with the video from the mockups
+        getVideo(videoId);
+        }
+    },[videoId]);
     const [selectedVideoDetails, setSelectedVideoDetails] = useState(SAMPLE_DETAILS);
-    const [selectedVideoId, setSelectedVideoId] = useState(null);
     const [videoList,setVideoList] = useState([]);
-    // const videoDetailsList = videoDetailsArray;
 
-    // event handler finds the video id and grabs boths the basic info and the video details
-    const handleSelectVideo = (selectedId) => {
-    // const foundVideoDetails = videoDetailsList.find((video) => selectedId === video.id);
-    // setSelectedVideoDetails(foundVideoDetails);
-    }
-    // put a list to the next videos that has the mounted video filtered from it 
     const filteredArray = videoList.filter((video)=> video.id !== selectedVideoDetails.id)
-
     return (
     <div className="rootdiv">
         <Header />
@@ -100,7 +97,7 @@ export default function VideoPage() {
             <Conversation comments={selectedVideoDetails.comments}/>
         </div>
         <div className="misc__aside">
-            <Next videoList={filteredArray} selectVideo={handleSelectVideo} />
+            <Next videoList={filteredArray} />
         </div>
         </div>
     </div>
