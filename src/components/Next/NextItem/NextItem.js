@@ -1,11 +1,9 @@
-import React from 'react';
 import './NextItem.scss';
 import "../../../styles/styles.scss";
-
-function NextItem(props) {
+// {title,id,channel,image,selectVideo}
+function NextItem({video, selectVideo}) {
+    const {title,id,channel,image} = video;
     // simple info pulled from the list of videos.json with the current video filtered from it
-    const {title, id, channel, image} = props.video;
-    const selectVideo = props.selectVideo;
     return (
     <li className="next__item" key={id} onClick={() => { selectVideo(id) }}>
         <img src={image} alt={title} className="next__thumbnail"/>

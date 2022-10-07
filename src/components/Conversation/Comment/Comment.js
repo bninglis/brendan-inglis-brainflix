@@ -1,10 +1,9 @@
-import React from 'react';
 import './Comment.scss'
 import addComment from '../../../assets/images/add_comment.svg';
 import mohanMuruge from '../../../assets/images/Mohan-muruge.jpg';
 import "../../../styles/styles.scss";
 
-function Comment(props) {
+function Comment() {
     return (
         <div className="comment">
         <img src={mohanMuruge} alt="user profile" className="comment__pfp pfp"/>

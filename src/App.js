@@ -11,7 +11,6 @@ import {useState} from 'react';
 
 function App() {
 // initialize the App with the video from the mockups
-  const [selectedVideo, setSelectedVideo] = useState(videoArray[0]);
   const [selectedVideoDetails, setSelectedVideoDetails] = useState(videoDetailsArray[0]);
   const videoList = videoArray;
   const videoDetailsList = videoDetailsArray;
@@ -20,20 +19,19 @@ function App() {
   const handleSelectVideo = (selectedId) => {
     const foundVideo = videoList.find((video) => selectedId === video.id);
     const foundVideoDetails = videoDetailsList.find((video) => selectedId === video.id);
-    setSelectedVideo(foundVideo);
     setSelectedVideoDetails(foundVideoDetails);
   }
 // put a list to the next videos that has the mounted video filtered from it 
-  const filteredArray = videoList.filter((video)=> video.id !== selectedVideo.id)
+  const filteredArray = videoList.filter((video)=> video.id !== selectedVideoDetails.id)
 
   return (
     <div className="rootdiv">
       <Header />
-      <VideoWindow selectedVideo={selectedVideo} selectedVideoDetails={selectedVideoDetails}/>
+      <VideoWindow poster={selectedVideoDetails.image} duration={selectedVideoDetails.duration}/>
       <div className="misc">
         <div className="misc__column">
           <Details selectedVideoDetails={selectedVideoDetails}/>
-          <Conversation selectedVideoDetails={selectedVideoDetails}/>
+          <Conversation comments={selectedVideoDetails.comments}/>
         </div>
         <div className="misc__aside">
           <Next videoList={filteredArray} selectVideo={handleSelectVideo} />

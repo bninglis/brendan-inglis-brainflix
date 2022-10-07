@@ -4,11 +4,19 @@ import PostedComment from "./PostedComment/PostedComment";
 import './Conversation.scss';
 import "../../styles/styles.scss";
 
-function Conversation(props) {
-    const comments = props.selectedVideoDetails.comments;
+function Conversation({comments}) {
+
+    const countComments = function () {
+        if (comments.length === 1) {
+            return '1 Comment';
+        } else {
+            return `${comments.length} Comments`;
+        }
+    }
+
     return (
         <div className="conversation">
-            <p className="conversation__count">3 Comments</p>
+            <p className="conversation__count">{countComments()}</p>
             <Comment />
             <ol className="discussion">
                 {comments.map((comment) => (

@@ -1,18 +1,14 @@
-import React from 'react';
 import './VideoWindow.scss';
 import "../../styles/styles.scss";
 import playIcon from "../../assets/images/play.svg";
 import fullscreenIcon from "../../assets/images/fullscreen.svg";
 import volumeIcon from "../../assets/images/volume_up.svg";
 
-function VideoWindow(props) {
-    const {image: selectedVideoPoster,} = props.selectedVideo;
-    const {duration: selectedVideoDuration} = props.selectedVideoDetails;
-
+function VideoWindow({poster, duration}) {
     return (
         <div>
             <div className="video__window">
-                <video controls={false} id="video" poster={selectedVideoPoster}>
+                <video controls={false} id="video" poster={poster}>
                     <source src="blank" />
                     <p>Your browser doesn't support HTML video</p>
                 </video>
@@ -23,7 +19,7 @@ function VideoWindow(props) {
                     <div className="video__timeline">
                         <div className="video__progressbar"></div>
                         <div className="video__time">
-                            <p className="video__currenttime">0:00/</p><p className="video__duration">{selectedVideoDuration}</p>
+                            <p className="video__currenttime">0:00/</p><p className="video__duration">{duration}</p>
                         </div>
                     </div>
                     <div className="video__volumefullscreen">
