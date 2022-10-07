@@ -105,7 +105,6 @@ textarea {
     background-color: $ALABASTER;
 
     @include tablet-plus{
-        height: 2.5rem;
         overflow: hidden;
         padding: 1rem;
 

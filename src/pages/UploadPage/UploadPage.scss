@@ -1,0 +1,53 @@
+@forward "../../styles/styles";
+
+@use "../../styles/styles" as *;
+
+.upload{
+    width:100%;
+    max-width: 45rem;
+    @include component-padding(0,1,1,1);
+    border-top: $MERCURY solid 0.0625rem;
+
+    &__headline{
+        padding-top: $MBEFORE_HEADLINE_PADDING;
+        @include component-margin(0,0,1)
+    }
+
+    &__form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__thumbnail{
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: $RADIUS;
+        outline: none;
+        @include component-margin(0,0,1)
+    }
+
+    &__title{
+        @include input-fields;
+        @include component-margin(0,0,1);
+    }
+
+    &__description{
+        @include input-fields;
+        @include component-margin(0,0,1);
+    }
+
+    &__publish{
+        @include component-margin(0,0,1);
+    }
+
+    &__cancel{
+        display: inline;
+        background-color: $WHITE;
+        color: $BRAIN_FLIX_BLUE;
+
+        &:hover{
+            background-color: $WHITE;
+            color: $BRAIN_FLIX_DARK_BLUE;
+        }
+    }
+}

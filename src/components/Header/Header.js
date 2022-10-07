@@ -19,7 +19,9 @@ function Header() {
                         <input type="text" className="actions__input" placeholder="Search"/>
                         <img src={mohanMuruge} alt="user profile" className="actions__pfp pfp actions__pfp--mobile"/>
                     </div>
-                    <button className="actions__upload"><img src={uploadLogo} alt="upload icon" className="button__icon icon" /><p className="button__text">UPLOAD</p></button>
+                    <Link to={"/upload"}>
+                        <button className="actions__upload" ><img src={uploadLogo} alt="upload icon" className="button__icon icon" /><p className="button__text">UPLOAD</p></button>
+                    </Link>
                     <img src={mohanMuruge} alt="user profile" className="actions__pfp pfp actions__pfp--tabletplus"/>
                 </div>
             </div>

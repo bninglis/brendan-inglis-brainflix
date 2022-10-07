@@ -185,4 +185,9 @@
     &:focus {
         border: 0.125rem solid $BRAIN_FLIX_BLUE;
     }
+
+    &::placeholder {
+        color: $BRAIN_FLIX_BLACK;
+        font-family: 'AvenirNext';
+    }
 }
