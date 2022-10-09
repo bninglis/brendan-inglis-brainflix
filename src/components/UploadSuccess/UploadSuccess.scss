@@ -1,0 +1,30 @@
+@forward '../../styles/styles';
+@use '../../styles/styles' as *;
+
+.success{
+    background-color: $BRAIN_FLIX_BLUE;
+    width: 50%;
+    height: 25vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1vw;
+    filter: blur(100vw);
+    opacity: 0;
+    transition: .5s;
+    z-index: 5;
+
+    &--visible{
+        opacity: 100%;
+        filter: blur(0vw);
+    }
+
+    &__text{
+        font-size: 7vw;
+        height: 70%;
+        line-height: 8vw;
+        display: flex;
+        text-align: center;
+        color: $WHITE;
+    }
+}

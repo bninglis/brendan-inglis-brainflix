@@ -126,3 +126,23 @@ header{
         animation-fill-mode: backwards;
     }
 }
+
+.blank{
+    position: relative;
+    opacity: 100%;
+    transition: .5s;
+    height: 100%;
+    width: 100%;
+
+    &--load{
+        opacity: 0;
+    }
+}
+
+.success{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    z-index: 5;
+}

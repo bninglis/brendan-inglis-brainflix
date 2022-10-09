@@ -2,30 +2,34 @@ import Header from "../../components/Header/Header";
 import publishIcon from "../../assets/images/publish.svg";
 import uploadPreview from "../../assets/images/Upload-video-preview.jpg";
 import "./UploadPage.scss";
-import { useRef, useState } from "react";
-import { useEffect } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import UploadSuccess from "../../components/UploadSuccess/UploadSuccess";
+
 
 
 
 
 export default function UploadPage(){
-    const animationClass = " button__text--uploading";
-    let publishButtonExtras = "";
-    const classNameString = `button__text${publishButtonExtras}`;
-    const [animate,setAnimate] = useState(null);
-    useEffect(() => {
-
-    },[publishButtonExtras])
+    const [animate,setAnimate] = useState("button__text");
+    const [loadClear,setLoadClear] = useState("blank")
+    const [successModal,setSuccessModal] = useState("success")
+    const navigate = useNavigate();
     const submitHandler = (event)=> {
         event.preventDefault();
-        publishButtonExtras = animationClass;
-        publishRef.addClass()
-        setAnimate("")
-        console.log(event.target)
+        setAnimate("button__text button__text--uploading")
+        setTimeout(()=>{
+            setSuccessModal("success success--visible");
+            setLoadClear("blank blank--load");
+            setTimeout(()=>{
+                navigate("/");
+            },1000)
+        },3000)
     };
-    const publishRef = useRef();
     return (
         <>
+        <UploadSuccess className="success" successModal={successModal}/>
+        <div className={loadClear}>
             <Header />
             <div className="upload__container">
                 <div className="upload">
@@ -44,12 +48,13 @@ export default function UploadPage(){
                             </div>
                         </div>
                         <div className="upload__buttons">
-                            <button className="upload__publish"><img src={publishIcon} alt="upload icon" className="button__icon icon" /><p ref={publishRef} className={classNameString}>PUBLISH</p></button>
+                            <button className="upload__publish"><img src={publishIcon} alt="upload icon" className="button__icon icon" /><p className={animate}>PUBLISH</p></button>
                             <button className="upload__cancel" type="reset">CANCEL</button>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
         </>
     )
 }
