@@ -38,6 +38,10 @@
         @include tablet-plus {
             margin-right: 10.625rem;
         }
+    
+        &--error{
+            border: 0.125rem solid $ERROR;
+        }
     }
 }
 
@@ -46,6 +50,10 @@
         @include tablet-plus{
             height: 2.5rem;
             padding-top: .65rem;
+        }
+        
+        &--error{
+            border: 0.125rem solid $ERROR;
         }
     }
 }

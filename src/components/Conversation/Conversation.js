@@ -3,9 +3,10 @@ import Comment from "./Comment/Comment";
 import PostedComment from "./PostedComment/PostedComment";
 import './Conversation.scss';
 import "../../styles/styles.scss";
+import { useState,useEffect } from 'react';
 
-function Conversation({comments}) {
-
+function Conversation({comments,videoId,BASE_URL,API_KEY}) {
+    const [commentsState,setCommentsState] = useState([])
     const countComments = function () {
         if (comments.length === 1) {
             return '1 Comment';
@@ -13,13 +14,16 @@ function Conversation({comments}) {
             return `${comments.length} Comments`;
         }
     }
+    useEffect(()=>{
+        setCommentsState(comments);
+    },[])
 
     return (
         <div className="conversation">
             <p className="conversation__count">{countComments()}</p>
-            <Comment />
+            <Comment videoId={videoId} BASE_URL={BASE_URL} API_KEY={API_KEY} commentsState={commentsState} setCommentsState={setCommentsState} />
             <ol className="discussion">
-                {comments.map((comment) => (
+                {commentsState.map((comment) => (
                     <PostedComment comment={comment} key={comment.id}/>
                 ))}
             </ol>

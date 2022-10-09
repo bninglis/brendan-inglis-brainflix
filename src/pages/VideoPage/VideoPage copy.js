@@ -21,29 +21,46 @@ const API_KEY = "687ee809-6094-46bd-9c3f-d3e742be9ada";
 const LIST_CALL = `${BASE_URL}/videos?api_key=${API_KEY}`
 
 
-export default function VideoPage({test,setTest}) {
-    const [selectedVideoDetails, setSelectedVideoDetails] = useState(null);
+export default function VideoPage() {
     let {id: paramsId} = useParams();
     const detailsCall = (id)=>{return `${BASE_URL}/videos/${id}?api_key=${API_KEY}`}
-    const [videoList,setVideoList] = useState([]);
     const getVideo = (id) => {
+        console.log("get video ran")
         axios.get(detailsCall(id)).then((response) =>{
+            console.log("getVideo response:", response.data)
             setSelectedVideoDetails(response.data);
+        }).then((response) => {
+            console.log("getVideo selectedVideoDetails:", selectedVideoDetails)
         })
     }
+    const [selectedVideoDetails, setSelectedVideoDetails] = useState(null);
+    const [videoList,setVideoList] = useState([]);
 
     useEffect(() => {
-        axios.get(LIST_CALL).then((listResponse) => {
-            const videoId = paramsId ?? listResponse.data[0].id;
-            setVideoList(listResponse.data.filter((video)=> video.id !== videoId))
-            getVideo(videoId);
+        if (!paramsId) {
+            console.log("No id if statement")
+            axios.get(LIST_CALL).then((listResponse) => {
+                setVideoList(listResponse.data.slice(1))
+                return listResponse;
+            }).then((response) => {
+                const plantId = id ?? response.data[0].id;getVideo(response.data[0].id)
+                })
+        } else {
+        axios.get(LIST_CALL).then((response) => {
+            const videoId = paramsId ?? response.data[0].id;
+            setVideoList(response.data)
         })
-        // eslint-disable-next-line 
+        getVideo(paramsId);
+        console.log("getVideo selectedVideoDetails:", selectedVideoDetails)
+        }
     },[]);
+    
 
-    if(selectedVideoDetails === null){
+    const filteredArray = videoList.filter((video)=> video.id !== selectedVideoDetails.id)
+    while(selectedVideoDetails === null){
         return (
             <>
+            {console.log("Loading page")}
                 <PageLoad/>
             </>
         )
@@ -55,10 +72,10 @@ export default function VideoPage({test,setTest}) {
         <div className="misc">
         <div className="misc__column">
             <Details selectedVideoDetails={selectedVideoDetails}/>
-            <Conversation comments={selectedVideoDetails.comments} videoId={selectedVideoDetails.id} BASE_URL={BASE_URL} API_KEY={API_KEY}/>
+            <Conversation comments={selectedVideoDetails.comments} paramsId={selectedVideoDetails.id} />
         </div>
         <div className="misc__aside">
-            <Next videoList={videoList} />
+            <Next videoList={filteredArray} />
         </div>
         </div>
     </div>
