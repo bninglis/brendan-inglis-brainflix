@@ -5,8 +5,7 @@ import viewsIcon from "../../assets/images/views.svg";
 import likesIcon from "../../assets/images/likes.svg";
 import convertTime from "../ConvertTime/ConvertTime";
 
-function Details(props) {
-    const {channel, description, likes, timestamp, title, views} = props.selectedVideoDetails;
+function Details({channel, description, likes, timestamp, title, views}) {
     return (
         <div>
             <h1 className="details__title">{title}</h1>

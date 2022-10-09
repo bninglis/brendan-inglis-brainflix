@@ -3,23 +3,29 @@ import addComment from '../../../assets/images/add_comment.svg';
 import mohanMuruge from '../../../assets/images/Mohan-muruge.jpg';
 import "../../../styles/styles.scss";
 import { useState, useRef } from 'react';
+
+// implemented the profanity filter from bandsite in brainflix, just checks that the user comments and name don't contain a preselected list of offensive terms found online.
 import { badWords } from '../../ProfanityFilter/ProfanityFilter';
 import axios from 'axios';
 
 
 function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState}) {
+    // ref used to clear comments after submission
     const formRef = useRef();
     const form = formRef.current;
     const [nameInputString, setNameInputString] = useState("");
     const [nameAttributes, setNameAttributes] = useState({class: "name__input",placeholder: "Enter your name"});
     const [commentInputString, setCommentInputString] = useState("");
     const [commentAttributes, setCommentAttributes] = useState({class: "post__textarea",placeholder: "Add a new comment"});
+    // monitors changes in inputs
     const handleChangeName = (event) => {
         setNameInputString(event.target.value);
     };
     const handleChangeComment = (event) => {
         setCommentInputString(event.target.value);
     };
+
+    // checks validity and highlights problem fields
     const isNameValid = ()=> {
         if (nameInputString===""){
             setNameAttributes({class: "name__input name__input--error",placeholder: "Name cannot be blank"});
@@ -34,6 +40,7 @@ function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState}) {
         }
     }
 
+    // checks validity and highlights problem fields
     const isCommentValid = ()=> {
         if (commentInputString===""){
             setCommentAttributes({class: "post__textarea post__textarea--error",placeholder: "Comment cannot be blank"});
@@ -49,7 +56,7 @@ function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState}) {
     }
     const isPostValid = ()=> {
         if(!isNameValid()){
-            // still need to run the validation check if the first returns false
+            // still need to run the comment validation check to highlight fields and return error message if the name validation returns false
             isCommentValid();
             return false;
         };
@@ -61,13 +68,14 @@ function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState}) {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (isPostValid()){
-            console.log("Post success!")
             axios.post(`${BASE_URL}/videos/${videoId}/comments?api_key=${API_KEY}`,{name: nameInputString, comment: commentInputString})
                 .then((response)=>{
-                    console.log(response)
                     setCommentsState([...commentsState,response.data])
                     form.name.value = ""
                     form.posttextarea.value = ""
+                })
+                .catch((error) => {
+                    alert(error.message)
                 })
         };
     };

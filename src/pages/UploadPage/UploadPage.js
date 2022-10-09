@@ -17,8 +17,10 @@ export default function UploadPage(){
     const navigate = useNavigate();
     const submitHandler = (event)=> {
         event.preventDefault();
+        // starts the publish button animation
         setAnimate("button__text button__text--uploading")
         setTimeout(()=>{
+            // makes the upload message visible
             setSuccessModal("success success--visible");
             setLoadClear("blank blank--load");
             setTimeout(()=>{
@@ -38,7 +40,7 @@ export default function UploadPage(){
                         <div className="upload__data">
                             <div className="upload__file">
                                 <label className="upload__label">VIDEO THUMBNAIL</label>
-                                <img className="upload__thumbnail" src={uploadPreview} />
+                                <img className="upload__thumbnail" src={uploadPreview} alt="upload preview" />
                             </div>
                             <div className="upload__fields">
                                 <label className="upload__label" htmlFor="videotitle">TITLE YOUR VIDEO</label>
@@ -48,7 +50,7 @@ export default function UploadPage(){
                             </div>
                         </div>
                         <div className="upload__buttons">
-                            <button className="upload__publish"><img src={publishIcon} alt="upload icon" className="button__icon icon" /><p className={animate}>PUBLISH</p></button>
+                            <button className="upload__publish"><img src={publishIcon} alt="publish icon" className="button__icon icon" /><p className={animate}>PUBLISH</p></button>
                             <button className="upload__cancel" type="reset">CANCEL</button>
                         </div>
                     </form>

@@ -16,7 +16,7 @@ function Conversation({comments,videoId,BASE_URL,API_KEY}) {
     }
     useEffect(()=>{
         setCommentsState(comments);
-    },[videoId])
+    },[videoId,comments])
 
     return (
         <div className="conversation">
