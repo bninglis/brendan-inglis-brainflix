@@ -78,12 +78,14 @@ header{
     &__description{
         @include input-fields;
         @include component-margin(0,0,1);
+        max-height: 4.375rem;
     }
 
     &__buttons{
         @include tablet-plus{
             display: flex;
             flex-direction: row-reverse;
+            justify-content: right;
         }
 
     }

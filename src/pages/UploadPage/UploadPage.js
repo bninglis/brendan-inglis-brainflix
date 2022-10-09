@@ -14,11 +14,13 @@ export default function UploadPage(){
     const [animate,setAnimate] = useState("button__text");
     const [loadClear,setLoadClear] = useState("blank")
     const [successModal,setSuccessModal] = useState("success")
+    const [successContainer,setSuccessContainer] = useState("success__container")
     const navigate = useNavigate();
     const submitHandler = (event)=> {
         event.preventDefault();
         // starts the publish button animation
         setAnimate("button__text button__text--uploading")
+        setSuccessContainer("success__container success__container--displayed")
         setTimeout(()=>{
             // makes the upload message visible
             setSuccessModal("success success--visible");
@@ -30,7 +32,7 @@ export default function UploadPage(){
     };
     return (
         <>
-        <UploadSuccess className="success" successModal={successModal}/>
+        <UploadSuccess className="success" successModal={successModal} successContainer={successContainer} />
         <div className={loadClear}>
             <Header />
             <div className="upload__container">

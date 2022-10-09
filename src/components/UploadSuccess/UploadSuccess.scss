@@ -27,4 +27,12 @@
         text-align: center;
         color: $WHITE;
     }
+
+    &__container{
+        display:none;
+        
+        &--displayed{
+            display: flex;
+        }
+    }
 }
