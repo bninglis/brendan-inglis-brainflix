@@ -39,7 +39,7 @@ export default function VideoPage({test,setTest}) {
             getVideo(videoId);
         })
         // eslint-disable-next-line 
-    },[]);
+    },[paramsId]);
 
     if(selectedVideoDetails === null){
         return (
@@ -55,7 +55,7 @@ export default function VideoPage({test,setTest}) {
         <div className="misc">
         <div className="misc__column">
             <Details selectedVideoDetails={selectedVideoDetails}/>
-            <Conversation comments={selectedVideoDetails.comments} videoId={selectedVideoDetails.id} BASE_URL={BASE_URL} API_KEY={API_KEY}/>
+            <Conversation comments={selectedVideoDetails.comments} videoId={selectedVideoDetails.id} BASE_URL={BASE_URL} API_KEY={API_KEY} />
         </div>
         <div className="misc__aside">
             <Next videoList={videoList} />

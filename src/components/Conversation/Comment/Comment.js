@@ -66,6 +66,8 @@ function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState}) {
                 .then((response)=>{
                     console.log(response)
                     setCommentsState([...commentsState,response.data])
+                    form.name.value = ""
+                    form.posttextarea.value = ""
                 })
         };
     };

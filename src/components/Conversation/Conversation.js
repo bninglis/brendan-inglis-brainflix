@@ -16,7 +16,7 @@ function Conversation({comments,videoId,BASE_URL,API_KEY}) {
     }
     useEffect(()=>{
         setCommentsState(comments);
-    },[])
+    },[videoId])
 
     return (
         <div className="conversation">
@@ -24,7 +24,7 @@ function Conversation({comments,videoId,BASE_URL,API_KEY}) {
             <Comment videoId={videoId} BASE_URL={BASE_URL} API_KEY={API_KEY} commentsState={commentsState} setCommentsState={setCommentsState} />
             <ol className="discussion">
                 {commentsState.map((comment) => (
-                    <PostedComment comment={comment} key={comment.id}/>
+                    <PostedComment comment={comment.comment} id={comment.id} name={comment.name} timestamp={comment.timestamp} BASE_URL={BASE_URL} API_KEY={API_KEY} commentsState={commentsState} setCommentsState={setCommentsState} videoId={videoId} key={comment.id}/>
                 ))}
             </ol>
         </div>

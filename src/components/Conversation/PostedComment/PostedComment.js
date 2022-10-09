@@ -4,27 +4,25 @@ import './PostedComment.scss';
 import "../../../styles/styles.scss";
 import mohanMuruge from '../../../assets/images/Mohan-muruge.jpg';
 import convertTime from "../../ConvertTime/ConvertTime";
-import likesIcon from "../../../assets/images/thumb_up_FILL0_wght400_GRAD0_opsz24.svg"
-import likesIconFilled from "../../../assets/images/thumb_up_FILL1_wght400_GRAD0_opsz24.svg"
 import deleteIcon from "../../../assets/images/delete_FILL0_wght400_GRAD0_opsz24.svg"
 import deleteIconFilled from "../../../assets/images/delete_FILL1_wght400_GRAD0_opsz24.svg"
+import axios from 'axios';
 
-function PostedComment(props) {
-    const likesRef = useRef();
+function PostedComment({comment, id, name, timestamp, BASE_URL, API_KEY, videoId, commentsState, setCommentsState}) {
     const deleteRef = useRef();
-    const handleLikesMouseOver = ((event)=>{
-        likesRef.current.src = likesIconFilled
-    })
-    const handleLikesMouseOut = ((event)=>{
-        likesRef.current.src = likesIcon
-    })
-    const handleDeleteMouseOver = ((event)=>{
+    const handleDeleteMouseOver = (()=>{
         deleteRef.current.src = deleteIconFilled
     })
-    const handleDeleteMouseOut = ((event)=>{
+    const handleDeleteMouseOut = (()=>{
         deleteRef.current.src = deleteIcon
     })
-    const {comment, id, name, timestamp} = props.comment;
+    const handleDeleteClick = (()=>{
+        axios.delete(`${BASE_URL}/videos/${videoId}/comments/${id}?api_key=${API_KEY}`)
+        .then((response)=>{
+            setCommentsState(commentsState.filter(comment => comment.id !== response.data.id))
+        });
+    });
+
     return (
         <li className="posted-comment" key={id}>
             <div className="posted-comment__sidebar">
@@ -39,12 +37,8 @@ function PostedComment(props) {
                 </div>
                 <p className="posted-comment__comment">{comment}</p>
                 <div className="posted-comment__actions">
-                <div className="likes">
-                    <p className="likes__text">No likes yet</p>
-                    <button className="likes__button actions__button" onMouseOver={handleLikesMouseOver} onMouseOut={handleLikesMouseOut}><img className="likes__image" src={likesIcon} ref={likesRef} /></button>
+                    <button className="delete__button actions__button" onMouseOver={handleDeleteMouseOver} onMouseOut={handleDeleteMouseOut} onClick={handleDeleteClick} >Delete<img className="delete__image" src={deleteIcon} ref={deleteRef} /></button>
                 </div>
-                <button className="delete__button actions__button" onMouseOver={handleDeleteMouseOver} onMouseOut={handleDeleteMouseOut} >Delete<img className="delete__image" src={deleteIcon} ref={deleteRef} /></button>
-            </div>
             </div>
 
         </li>
