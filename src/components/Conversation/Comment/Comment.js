@@ -9,7 +9,7 @@ import { badWords } from '../../ProfanityFilter/ProfanityFilter';
 import axios from 'axios';
 
 
-function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState}) {
+function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState,forceUpdate,setForceUpdate}) {
     // ref used to clear comments after submission
     const formRef = useRef();
     const form = formRef.current;
@@ -71,6 +71,7 @@ function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState}) {
             axios.post(`${BASE_URL}/videos/${videoId}/comments?api_key=${API_KEY}`,{name: nameInputString, comment: commentInputString})
                 .then((response)=>{
                     setCommentsState([...commentsState,response.data])
+                    setForceUpdate(forceUpdate+1)
                     form.name.value = ""
                     form.posttextarea.value = ""
                 })

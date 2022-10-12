@@ -39,8 +39,9 @@ export default function UploadPage(){
                     <form className="upload__form" onSubmit={submitHandler}>
                         <div className="upload__data">
                             <div className="upload__file">
-                                <label className="upload__label">VIDEO THUMBNAIL</label>
+                                <label htmlFor="cover" className="upload__label">VIDEO THUMBNAIL</label>
                                 <img className="upload__thumbnail" src={uploadPreview} alt="upload preview" />
+                                <input name="cover" className="upload__cover" type="file"/>
                             </div>
                             <div className="upload__fields">
                                 <label className="upload__label" htmlFor="videotitle">TITLE YOUR VIDEO</label>
