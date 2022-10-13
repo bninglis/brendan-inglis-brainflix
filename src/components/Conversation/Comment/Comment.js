@@ -9,7 +9,7 @@ import { badWords } from '../../ProfanityFilter/ProfanityFilter';
 import axios from 'axios';
 
 
-function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState,forceUpdate,setForceUpdate}) {
+function Comment({videoId,BASE_URL,commentsState,setCommentsState,commentsCount,setCommentsCount}) {
     // ref used to clear comments after submission
     const formRef = useRef();
     const form = formRef.current;
@@ -68,14 +68,17 @@ function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState,forceU
     const handleSubmit = (event) => {
         event.preventDefault();
         if (isPostValid()){
-            axios.post(`${BASE_URL}/videos/${videoId}/comments`,{name: nameInputString, comment: commentInputString})
+            console.log(videoId)
+            const commentObject = {name: nameInputString, comment: commentInputString}
+            axios.post(`${BASE_URL}/videos/${videoId}/comments`,commentObject)
                 .then((response)=>{
                     setCommentsState([...commentsState,response.data])
-                    setForceUpdate(forceUpdate+1)
                     form.name.value = ""
                     form.posttextarea.value = ""
+                    setCommentsCount(commentsCount+1);
                 })
                 .catch((error) => {
+                    console.log({name: nameInputString, comment: commentInputString})
                     alert(error.message)
                 })
         };

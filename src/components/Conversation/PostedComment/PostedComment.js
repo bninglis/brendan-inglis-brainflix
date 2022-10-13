@@ -9,7 +9,7 @@ import deleteIconFilled from "../../../assets/images/delete_FILL1_wght400_GRAD0_
 import axios from 'axios';
 
 // mouseover and mouseout events are for hovering over the delete button
-function PostedComment({comment, id, name, timestamp, BASE_URL, API_KEY, videoId, commentsState, setCommentsState}) {
+function PostedComment({comment, id, name, timestamp, BASE_URL, videoId, commentsState, setCommentsState}) {
     // ref used to point to img to change src
     const deleteRef = useRef();
     const handleDeleteMouseOver = (()=>{
@@ -19,7 +19,7 @@ function PostedComment({comment, id, name, timestamp, BASE_URL, API_KEY, videoId
         deleteRef.current.src = deleteIcon
     })
     const handleDeleteClick = (()=>{
-        axios.delete(`${BASE_URL}/videos/${videoId}/comments/${id}?api_key=${API_KEY}`)
+        axios.delete(`${BASE_URL}/videos/${videoId}/comments/${id}`)
         .then((response)=>{
             setCommentsState(commentsState.filter(comment => comment.id !== response.data.id))
         })

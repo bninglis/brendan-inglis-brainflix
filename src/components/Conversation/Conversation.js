@@ -7,6 +7,7 @@ import { useState,useEffect } from 'react';
 
 function Conversation({comments,videoId,BASE_URL,API_KEY}) {
     const [commentsState,setCommentsState] = useState([])
+    const [commentsCount, setCommentsCount] = useState(0);
     const countComments = function () {
         if (comments.length === 1) {
             return '1 Comment';
@@ -16,15 +17,16 @@ function Conversation({comments,videoId,BASE_URL,API_KEY}) {
     }
     useEffect(()=>{
         setCommentsState(comments);
-    },[videoId,comments])
+        setCommentsCount(comments.length);
+    },[videoId,comments,commentsCount])
 
     return (
         <div className="conversation">
-            <p className="conversation__count">{countComments()}</p>
-            <Comment videoId={videoId} BASE_URL={BASE_URL} API_KEY={API_KEY} commentsState={commentsState} setCommentsState={setCommentsState} />
+            <p className="conversation__count">{commentsCount} Comments</p>
+            <Comment videoId={videoId} BASE_URL={BASE_URL} API_KEY={API_KEY} commentsState={commentsState} setCommentsState={setCommentsState} setCommentsCount={setCommentsCount} />
             <ol className="discussion">
                 {commentsState.map((comment) => (
-                    <PostedComment comment={comment.comment} id={comment.id} name={comment.name} timestamp={comment.timestamp} BASE_URL={BASE_URL} API_KEY={API_KEY} commentsState={commentsState} setCommentsState={setCommentsState} videoId={videoId} key={comment.id}/>
+                    <PostedComment comment={comment.comment} id={comment.id} name={comment.name} timestamp={comment.timestamp} BASE_URL={BASE_URL} API_KEY={API_KEY} commentsState={commentsState} commentsCount={commentsCount} setCommentsState={setCommentsState} videoId={videoId} key={comment.id}/>
                 ))}
             </ol>
         </div>
