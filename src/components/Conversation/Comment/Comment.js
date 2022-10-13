@@ -68,7 +68,7 @@ function Comment({videoId,BASE_URL,API_KEY,commentsState,setCommentsState,forceU
     const handleSubmit = (event) => {
         event.preventDefault();
         if (isPostValid()){
-            axios.post(`${BASE_URL}/videos/${videoId}/comments?api_key=${API_KEY}`,{name: nameInputString, comment: commentInputString})
+            axios.post(`${BASE_URL}/videos/${videoId}/comments`,{name: nameInputString, comment: commentInputString})
                 .then((response)=>{
                     setCommentsState([...commentsState,response.data])
                     setForceUpdate(forceUpdate+1)

@@ -16,16 +16,16 @@ import PageLoad from '../../components/PageLoad/PageLoad'
 // "801e42e5-0bec-4074-9343-7850bde3319e"
 // "adb9317e-65d9-4dbd-88a3-c2e8fe00b0a6"
 
-const BASE_URL = 'https://project-2-api.herokuapp.com';
+const BASE_URL = 'http://localhost:8080';
 const API_KEY = "687ee809-6094-46bd-9c3f-d3e742be9ada";
-const LIST_CALL = `${BASE_URL}/videos?api_key=${API_KEY}`
+const LIST_CALL = `${BASE_URL}/videos`
 
 
 export default function VideoPage() {
     const [selectedVideoDetails, setSelectedVideoDetails] = useState(null);
     const {id: paramsId} = useParams();
     // defined detailsCall as a function so that it could still have the id passed to it dynamically
-    const detailsCall = (id)=>{return `${BASE_URL}/videos/${id}?api_key=${API_KEY}`}
+    const detailsCall = (id)=>{return `${BASE_URL}/videos/${id}`}
     const [videoList,setVideoList] = useState([]);
     // getVideo was previously defined as a function because it was useful to reuse, the refactor removed that usefulness but it probably is still more legible
     const getVideo = (id) => {
