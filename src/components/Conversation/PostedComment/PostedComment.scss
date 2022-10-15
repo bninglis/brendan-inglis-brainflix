@@ -57,7 +57,7 @@
 
     &__actions{
         display: flex;
-        justify-content: right;
+        justify-content: space-between;
         align-items: center;
         @include component-margin(1);
     }
@@ -84,5 +84,33 @@
     &__image{
         margin-left: 0.5rem;
         background-color: rgba($color: #000000, $alpha: 0);
+    }
+}
+
+.likes{
+    display: flex;
+    align-items: center;
+    width:10rem;
+
+    &__button{
+        width: auto;
+        height: auto;
+        padding:0;
+        line-height: 0;
+        background-color: rgba($color: #000000, $alpha: 0);
+
+        &:hover{
+            background-color: rgba($color: #000000, $alpha: 0);
+            cursor: pointer;
+        }
+    }
+
+    &__icon{
+        background-color: rgba($color: #000000, $alpha: 0);
+    }
+
+    &__text{
+        margin-top: 1%;
+        margin-right: .5rem;
     }
 }

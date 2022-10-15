@@ -1,21 +1,21 @@
 @forward "../../styles/styles.scss";
 @use "../../styles/styles.scss" as *;
 
-.conversation{
-    @include mobile{
-        @include component-margin(1,1,1,1);
-    }
-    
-    @include tablet{
-        @include component-margin(1,1,1,1);
-    }
+.conversation {
+  @include mobile {
+    @include component-margin(1, 1, 1, 1);
+  }
 
-    @include desktop{
-        @include component-margin(1,0,1,1);
-    }
+  @include tablet {
+    @include component-margin(1, 1, 1, 1);
+  }
 
-    &__count{
-        font-weight: 700;
-        @include component-margin(0,0,1);
-    }
+  @include desktop {
+    @include component-margin(1, 0, 1, 1);
+  }
+
+  &__count {
+    font-weight: 700;
+    @include component-margin(0, 0, 1);
+  }
 }
