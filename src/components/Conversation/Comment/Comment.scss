@@ -11,6 +11,10 @@
         @include component-padding(0,1);
     }
 
+    &__count{
+        @include component-margin(0,0,1);
+    }
+
     &__pfp{
         @include component-margin(1,1,1);
     }

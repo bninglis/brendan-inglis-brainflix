@@ -9,7 +9,7 @@ import { badWords } from '../../ProfanityFilter/ProfanityFilter';
 import axios from 'axios';
 
 
-function Comment({videoId,BASE_URL,commentsState,setCommentsState,commentsCount,setCommentsCount}) {
+function Comment({videoId,BASE_URL,commentsState,setCommentsState,forceUpdate}) {
     // ref used to clear comments after submission
     const formRef = useRef();
     const form = formRef.current;
@@ -72,10 +72,14 @@ function Comment({videoId,BASE_URL,commentsState,setCommentsState,commentsCount,
             const commentObject = {name: nameInputString, comment: commentInputString}
             axios.post(`${BASE_URL}/videos/${videoId}/comments`,commentObject)
                 .then((response)=>{
-                    setCommentsState([...commentsState,response.data])
                     form.name.value = ""
                     form.posttextarea.value = ""
-                    setCommentsCount(commentsCount+1);
+                    axios.get(`${BASE_URL}/videos/${videoId}`)
+                        .then((response)=>{
+                            console.log(response.data.comments)
+                            setCommentsState(response.data.comments)
+                            forceUpdate();
+                        })
                 })
                 .catch((error) => {
                     console.log({name: nameInputString, comment: commentInputString})
@@ -83,20 +87,32 @@ function Comment({videoId,BASE_URL,commentsState,setCommentsState,commentsCount,
                 })
         };
     };
+
+    const countComments = function (length) {
+        if (length === 1) {
+            return '1 Comment';
+        } else {
+            return `${length} Comments`;
+        }
+    }
+
     return (
-        <div className="comment">
-        <img src={mohanMuruge} alt="user profile" className="comment__pfp pfp"/>
-        <form action="" className="comment__form" onSubmit={handleSubmit} ref={formRef}>
-            <label htmlFor="name" className="name__label">NAME</label>
-            <input type="text" name="name" autoComplete="off" className={nameAttributes.class} maxLength="45" placeholder={nameAttributes.placeholder} onChange={handleChangeName}/>
-            <label htmlFor="posttextarea" className="post__label">JOIN THE CONVERSATION</label>
-            <textarea name="posttextarea" id="postTextArea" className={commentAttributes.class} wrap="soft" placeholder={commentAttributes.placeholder} onChange={handleChangeComment}/>
-            <button className="comment__button">
-                <img src={addComment} alt="comment icon" className="button__icon icon"/>
-                <p className="button__text">COMMENT</p>
-            </button>
-        </form>
-    </div>
+        <div className="comment__container">
+            <h3 className="comment__count">{countComments(commentsState.length)}</h3>
+            <div className="comment">
+                <img src={mohanMuruge} alt="user profile" className="comment__pfp pfp"/>
+                <form action="" className="comment__form" onSubmit={handleSubmit} ref={formRef}>
+                    <label htmlFor="name" className="name__label">NAME</label>
+                    <input type="text" name="name" autoComplete="off" className={nameAttributes.class} maxLength="45" placeholder={nameAttributes.placeholder} onChange={handleChangeName}/>
+                    <label htmlFor="posttextarea" className="post__label">JOIN THE CONVERSATION</label>
+                    <textarea name="posttextarea" id="postTextArea" className={commentAttributes.class} wrap="soft" placeholder={commentAttributes.placeholder} onChange={handleChangeComment}/>
+                    <button className="comment__button">
+                        <img src={addComment} alt="comment icon" className="button__icon icon"/>
+                        <p className="button__text">COMMENT</p>
+                    </button>
+                </form>
+            </div>
+        </div>
     );
 }
 

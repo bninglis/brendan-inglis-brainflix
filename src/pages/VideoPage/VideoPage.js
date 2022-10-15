@@ -23,6 +23,7 @@ const LIST_CALL = `${BASE_URL}/videos`
 
 export default function VideoPage() {
     const [selectedVideoDetails, setSelectedVideoDetails] = useState(null);
+    const [forceRender, setForceRender] = useState(0);
     const {id: paramsId} = useParams();
     // defined detailsCall as a function so that it could still have the id passed to it dynamically
     const detailsCall = (id)=>{return `${BASE_URL}/videos/${id}`}
@@ -66,8 +67,23 @@ export default function VideoPage() {
         <VideoWindow poster={selectedVideoDetails.image} duration={selectedVideoDetails.duration}/>
         <div className="misc">
         <div className="misc__column">
-            <Details channel={selectedVideoDetails.channel} description={selectedVideoDetails.description} likes={selectedVideoDetails.likes} timestamp={selectedVideoDetails.timestamp} title={selectedVideoDetails.title} views={selectedVideoDetails.views} />
-            <Conversation comments={selectedVideoDetails.comments} videoId={selectedVideoDetails.id} BASE_URL={BASE_URL} API_KEY={API_KEY} />
+            <Details channel={selectedVideoDetails.channel} 
+                description={selectedVideoDetails.description} 
+                likes={selectedVideoDetails.likes} 
+                timestamp={selectedVideoDetails.timestamp} 
+                title={selectedVideoDetails.title} 
+                views={selectedVideoDetails.views} 
+                videoId={selectedVideoDetails.id}
+                BASE_URL={BASE_URL}  
+            />
+            <Conversation 
+                comments={selectedVideoDetails.comments} 
+                videoId={selectedVideoDetails.id} 
+                BASE_URL={BASE_URL} 
+                API_KEY={API_KEY} 
+                forceRender={forceRender}
+                setForceRender={setForceRender}
+            />
         </div>
         <div className="misc__aside">
             <Next videoList={videoList} />

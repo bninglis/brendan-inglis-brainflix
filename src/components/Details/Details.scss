@@ -65,6 +65,16 @@
         }
     }
 
+    &__fave{
+        background-color: rgba($color: #000000, $alpha: 0);
+        width: auto;
+
+        &:hover{
+            background-color: rgba($color: #000000, $alpha: 0);
+            cursor: pointer;
+        }
+    }
+
     &__views{
         @include component-margin(0,1);
     }
