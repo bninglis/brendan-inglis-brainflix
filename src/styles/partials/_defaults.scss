@@ -81,7 +81,7 @@ button {
     }
 }
 
-input {
+.input {
     @include input-fields;
     height: 2.25rem;
     min-width: 15rem;
@@ -167,36 +167,4 @@ header {
 .button__text {
     @include labels-and-buttons(false);
     width: 100%;
-}
-
-.video__button {
-    width: auto;
-    background-color: rgba($BRAIN_FLIX_DARK_BLACK,.5);
-    padding: 0.25rem .7rem 0.25rem .7rem;
-    height: 1.5rem;
-    line-height: 0;
-    font-size: 0;
-    display: flex;
-    justify-content: center;
-
-    @include tablet-plus{
-        height: auto;
-        padding: .5rem 1rem .5rem 1rem;
-    }
-}
-
-.video__button img {
-    background-color: rgba(#000000,0);
-    object-fit: cover;
-    display: flex;
-    justify-content: center;
-}
-
-.video__currenttime, .video__duration {
-    margin:0;
-    margin-top: .2rem;
-    display: flex;
-    align-items: center;
-    font-size: .5rem;
-    color: $WHITE;
 }

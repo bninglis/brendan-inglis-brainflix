@@ -23,8 +23,9 @@ function Header() {
             />
             <input
               type='text'
-              className='actions__input'
+              className='actions__input input'
               placeholder='Search'
+              id='search'
             />
             <img
               src={mohanMuruge}

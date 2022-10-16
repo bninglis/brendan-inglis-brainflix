@@ -103,7 +103,7 @@ function Comment({videoId,BASE_URL,commentsState,setCommentsState,forceUpdate}) 
                 <img src={mohanMuruge} alt="user profile" className="comment__pfp pfp"/>
                 <form action="" className="comment__form" onSubmit={handleSubmit} ref={formRef}>
                     <label htmlFor="name" className="name__label">NAME</label>
-                    <input type="text" name="name" autoComplete="off" className={nameAttributes.class} maxLength="45" placeholder={nameAttributes.placeholder} onChange={handleChangeName}/>
+                    <input type="text" name="name" autoComplete="off" className={`${nameAttributes.class} input`} maxLength="45" placeholder={nameAttributes.placeholder} onChange={handleChangeName}/>
                     <label htmlFor="posttextarea" className="post__label">JOIN THE CONVERSATION</label>
                     <textarea name="posttextarea" id="postTextArea" className={commentAttributes.class} wrap="soft" placeholder={commentAttributes.placeholder} onChange={handleChangeComment}/>
                     <button className="comment__button">
