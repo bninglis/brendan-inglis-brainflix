@@ -145,6 +145,7 @@
         border-radius: 50%;
         border: none;
         outline: none;
+        transition: 1s linear;
 
         &-0 {
             cursor: grab;
@@ -170,6 +171,7 @@
         background: $BRAIN_FLIX_DARK_BLACK;
         border-radius: 0.15rem;
         height: 0.3rem;
+        transition: 1s linear;
 
         &-0 {
             background-color: $BRAIN_FLIX_BLUE;

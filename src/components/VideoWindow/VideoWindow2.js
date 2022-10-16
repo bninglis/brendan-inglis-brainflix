@@ -5,20 +5,18 @@ import pauseIcon from "../../assets/images/pause.svg";
 import fullscreenIcon from "../../assets/images/fullscreen.svg";
 import volumeIcon from "../../assets/images/volume_up.svg";
 import videoFile from "../../assets/videos/brainstation-sample-video.mp4";
-import { useState, useRef, useEffect } from "react";
-import ReactSlider from "react-slider";
+import { useState, useRef } from "react";
+import Slider from "@mui/material/Slider";
+import styled from "@emotion/styled";
 
 function VideoWindow({ poster }) {
     const videoRef = useRef();
     const playImgRef = useRef();
     const sliderRef = useRef();
     const [playState, setPlayState] = useState(false);
-    const [duration, setDuration] = useState(1);
-    const [defaultValueToggle, setDefaultValueToggle] = useState(true);
-    const [valueToggle, setValueToggle] = useState(true);
-    const [onAfterChangeToggle, setOnAfterChangeToggle] = useState(false);
-    const [onBeforeChangeToggle, setOnBeforeChangeToggle] = useState(true);
-    const [onChangeToggle, setOnChangeToggle] = useState(false);
+    const [duration, setDuration] = useState(0);
+    const [videoProgress, setVideoProgress] = useState(0);
+    const [bufferingPercentage, setBufferingPercentage] = useState(0);
     const [bufferingTotal, setBufferingTotal] = useState(0);
     const [sliderValues, setSliderValues] = useState([0, 0]);
 
@@ -37,7 +35,11 @@ function VideoWindow({ poster }) {
         setDuration(videoRef.current.duration);
     };
 
-    const playButton = (directive) => {
+    const assignSliderDistance = (current, total) => {
+        return (current / total) * 100;
+    };
+
+    const videoLogic = (directive) => {
         if (directive === "play") {
             if (playState === false) {
                 videoRef.current.play();
@@ -71,41 +73,16 @@ function VideoWindow({ poster }) {
     };
 
     window.setInterval(() => {
-        const newPlayhead = (videoRef.current?.currentTime / duration) * 100;
+        setVideoProgress(
+            assignSliderDistance(videoRef.current?.currentTime, duration)
+        );
         updateBuffered();
-        const newBuffer = (bufferingTotal / duration) * 100;
-        setSliderValues([newPlayhead, newBuffer]);
+        setBufferingPercentage(assignSliderDistance(bufferingTotal, duration));
+        setSliderValues([videoProgress, bufferingPercentage]);
     }, 1000);
 
-    // const handleSliderClick = (e) => {
-    //     videoRef.current?.pause();
-    //     console.log(e.target.value);
-    //     e.target.defaultValue = sliderValues;
-    //     e.target.onChange = handleSliderChange;
-    // };
-    const handleAfterChange = (e) => {
-        e.target.value = sliderValues;
-        videoRef.current?.play();
-    };
-
     const handleSliderChange = (e) => {
-        e.target.onAfterChange = handleAfterChange;
-        setSliderValues([e.target.value, sliderValues[1]]);
-        videoRef.current?.fastSeek(e.target.value);
-    };
-
-    const handleSliderClick = (e) => {};
-
-    const handleBeforeChange = (e) => {
-        videoRef.current?.pause();
-        console.log(e.target);
-        // e.target.defaultValue = sliderValues;
-        e.target.onChange = handleSliderChange;
-        setSliderValues(e.target.value);
-    };
-    const handleEnded = (e) => {
-        e.target.load();
-        playButton("play");
+        console.log(e.target.value);
     };
 
     return (
@@ -118,9 +95,6 @@ function VideoWindow({ poster }) {
                     poster={poster}
                     ref={videoRef}
                     onLoadedMetadata={handleLoadedMetadata}
-                    onEnded={handleEnded}
-                    onChange={onChangeToggle}
-                    onAfterChange={false}
                     preload=''
                 >
                     <source src={videoFile} type='video/mp4' />
@@ -129,46 +103,13 @@ function VideoWindow({ poster }) {
                 <div className='video__controls'>
                     <button
                         className='video__button video__button--play'
-                        onClick={() => playButton("play")}
+                        onClick={() => videoLogic("play")}
                     >
                         <img src={playIcon} alt='play icon' ref={playImgRef} />
                     </button>
                     <div className='video__timeline'>
-                        <ReactSlider
-                            className='video-slider'
-                            thumbClassName='video-slider__thumb'
-                            trackClassName='video-slider__track'
-                            disabled={false}
-                            // onChange={onChangeToggle}
-                            step={1}
-                            pearling
-                            minDistance={0.1}
-                            defaultValue={
-                                onChangeToggle === true
-                                    ? undefined
-                                    : sliderValues
-                            }
-                            value={
-                                onChangeToggle === true
-                                    ? sliderValues
-                                    : undefined
-                            }
-                            onChange={
-                                onChangeToggle === true
-                                    ? handleSliderChange
-                                    : undefined
-                            }
-                            onBeforeChange={
-                                onBeforeChangeToggle === true
-                                    ? handleBeforeChange
-                                    : undefined
-                            }
-                            onAfterChange={
-                                onAfterChangeToggle === true
-                                    ? handleAfterChange
-                                    : undefined
-                            }
-                        />
+                        <Slider value={sliderValue} defaultValue={}/>
+
                         {/* <input
               type='range'
               value={videoProgress}
