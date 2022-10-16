@@ -5,33 +5,32 @@ import pauseIcon from "../../assets/images/pause.svg";
 import fullscreenIcon from "../../assets/images/fullscreen.svg";
 import volumeIcon from "../../assets/images/volume_up.svg";
 import videoFile from "../../assets/videos/test.mp4";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import ReactSlider from "react-slider";
 import Volume from "../Volume/Volume";
+
+// could not get the volume functions 
 
 function VideoWindow({ poster }) {
     const videoRef = useRef();
     const playImgRef = useRef();
     const sliderRef = useRef();
-    const volumeRef = useRef();
     const [playState, setPlayState] = useState(false);
     const [duration, setDuration] = useState(1);
-    const [volumeValue, setVolumeValue] = useState(50);
-    const [onChangeValue, setOnChangeValue] = useState(false);
     const [bufferingTotal, setBufferingTotal] = useState(0);
     const [sliderValues, setSliderValues] = useState([0, 0]);
 
-    // const changePlayIcon = (state) => {
-    //   if (state === false) {
+    // const volumeRef = useRef();
+    // const [volumeValue, setVolumeValue] = useState(50);
+    // const [onChangeValue, setOnChangeValue] = useState(false);
+
+    // 
     const formatVideoTime = (time) => {
         return `${Math.floor(time / 60)}:${String(
             Math.floor(time % 60)
         ).padStart(2, "0")}`;
     };
-    //   } else if (state === true) {
 
-    //   }
-    // };
     const handleLoadedMetadata = () => {
         setDuration(videoRef.current.duration);
     };
@@ -63,9 +62,6 @@ function VideoWindow({ poster }) {
             if (totalBufferedTime > bufferingTotal && !!totalBufferedTime) {
                 setBufferingTotal(totalBufferedTime);
             }
-            // else {
-            //     setBufferingTotal(bufferingTotal);
-            // }
         }
     };
 
@@ -147,7 +143,7 @@ function VideoWindow({ poster }) {
                         <button className='video__button video__button--volume'>
                             <img src={volumeIcon} alt='volume icon' />
                         </button>
-                        <Volume video={videoRef} />
+                        {/* <Volume video={videoRef} /> */}
                     </div>
                 </div>
             </div>

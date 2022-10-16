@@ -25,13 +25,13 @@ export default function Volume({ video }) {
                         minDistance={0.1}
                         defaultValue={50}
                     /> */}
-                    <input
+                    {/* <input
                         type='range'
                         min='0'
                         max='100'
                         className='volume__slider'
                         onChange={handleOnChange}
-                    />
+                    /> */}
                 </div>
             </div>
         </div>
