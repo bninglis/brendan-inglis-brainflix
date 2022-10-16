@@ -4,21 +4,20 @@ import playIcon from "../../assets/images/play.svg";
 import pauseIcon from "../../assets/images/pause.svg";
 import fullscreenIcon from "../../assets/images/fullscreen.svg";
 import volumeIcon from "../../assets/images/volume_up.svg";
-import videoFile from "../../assets/videos/brainstation-sample-video.mp4";
+import videoFile from "../../assets/videos/test.mp4";
 import { useState, useRef, useEffect } from "react";
 import ReactSlider from "react-slider";
+import Volume from "../Volume/Volume";
 
 function VideoWindow({ poster }) {
     const videoRef = useRef();
     const playImgRef = useRef();
     const sliderRef = useRef();
+    const volumeRef = useRef();
     const [playState, setPlayState] = useState(false);
     const [duration, setDuration] = useState(1);
-    const [defaultValueToggle, setDefaultValueToggle] = useState(true);
-    const [valueToggle, setValueToggle] = useState(true);
-    const [onAfterChangeToggle, setOnAfterChangeToggle] = useState(false);
-    const [onBeforeChangeToggle, setOnBeforeChangeToggle] = useState(true);
-    const [onChangeToggle, setOnChangeToggle] = useState(false);
+    const [volumeValue, setVolumeValue] = useState(50);
+    const [onChangeValue, setOnChangeValue] = useState(false);
     const [bufferingTotal, setBufferingTotal] = useState(0);
     const [sliderValues, setSliderValues] = useState([0, 0]);
 
@@ -77,32 +76,17 @@ function VideoWindow({ poster }) {
         setSliderValues([newPlayhead, newBuffer]);
     }, 1000);
 
-    // const handleSliderClick = (e) => {
-    //     videoRef.current?.pause();
-    //     console.log(e.target.value);
-    //     e.target.defaultValue = sliderValues;
-    //     e.target.onChange = handleSliderChange;
-    // };
-    const handleAfterChange = (e) => {
-        e.target.value = sliderValues;
-        videoRef.current?.play();
-    };
-
     const handleSliderChange = (e) => {
-        e.target.onAfterChange = handleAfterChange;
-        setSliderValues([e.target.value, sliderValues[1]]);
-        videoRef.current?.fastSeek(e.target.value);
+        let currentPlayhead =
+            (sliderRef.current.state.value[0] / 100) * duration;
+        setSliderValues([currentPlayhead, sliderValues[1]]);
+        videoRef.current.currentTime = currentPlayhead;
     };
 
-    const handleSliderClick = (e) => {};
-
-    const handleBeforeChange = (e) => {
-        videoRef.current?.pause();
-        console.log(e.target);
-        // e.target.defaultValue = sliderValues;
-        e.target.onChange = handleSliderChange;
-        setSliderValues(e.target.value);
+    const handleFullscreen = (e) => {
+        videoRef.current.requestFullscreen();
     };
+
     const handleEnded = (e) => {
         e.target.load();
         playButton("play");
@@ -119,8 +103,6 @@ function VideoWindow({ poster }) {
                     ref={videoRef}
                     onLoadedMetadata={handleLoadedMetadata}
                     onEnded={handleEnded}
-                    onChange={onChangeToggle}
-                    onAfterChange={false}
                     preload=''
                 >
                     <source src={videoFile} type='video/mp4' />
@@ -135,48 +117,18 @@ function VideoWindow({ poster }) {
                     </button>
                     <div className='video__timeline'>
                         <ReactSlider
-                            className='video-slider'
-                            thumbClassName='video-slider__thumb'
-                            trackClassName='video-slider__track'
+                            ref={sliderRef}
+                            className='vslider'
+                            thumbClassName='vslider__thumb'
+                            trackClassName='vslider__track'
                             disabled={false}
-                            // onChange={onChangeToggle}
-                            step={1}
+                            onChange={handleSliderChange}
+                            step={5}
                             pearling
                             minDistance={0.1}
-                            defaultValue={
-                                onChangeToggle === true
-                                    ? undefined
-                                    : sliderValues
-                            }
-                            value={
-                                onChangeToggle === true
-                                    ? sliderValues
-                                    : undefined
-                            }
-                            onChange={
-                                onChangeToggle === true
-                                    ? handleSliderChange
-                                    : undefined
-                            }
-                            onBeforeChange={
-                                onBeforeChangeToggle === true
-                                    ? handleBeforeChange
-                                    : undefined
-                            }
-                            onAfterChange={
-                                onAfterChangeToggle === true
-                                    ? handleAfterChange
-                                    : undefined
-                            }
+                            defaultValue={0}
+                            value={sliderValues}
                         />
-                        {/* <input
-              type='range'
-              value={videoProgress}
-              className='video__slider video__slider--playhead slider'
-              min='1'
-              max='100'
-  />*/}
-
                         <div className='video__time'>
                             <p className='video__currenttime'>
                                 {`${formatVideoTime(
@@ -186,12 +138,16 @@ function VideoWindow({ poster }) {
                         </div>
                     </div>
                     <div className='video__volumefullscreen'>
-                        <button className='video__button video__button--fullscreen'>
+                        <button
+                            className='video__button video__button--fullscreen'
+                            onClick={handleFullscreen}
+                        >
                             <img src={fullscreenIcon} alt='fullscreen icon' />
                         </button>
                         <button className='video__button video__button--volume'>
                             <img src={volumeIcon} alt='volume icon' />
                         </button>
+                        <Volume video={videoRef} />
                     </div>
                 </div>
             </div>
