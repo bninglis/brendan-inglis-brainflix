@@ -75,11 +75,12 @@ function Comment({videoId,BASE_URL,commentsState,setCommentsState,forceUpdate}) 
                     form.name.value = ""
                     form.posttextarea.value = ""
                     axios.get(`${BASE_URL}/videos/${videoId}`)
-                        .then((response)=>{
+                        .then((response) => {
                             console.log(response.data.comments)
                             setCommentsState(response.data.comments)
                             forceUpdate();
                         })
+                        .catch((error) => { alert(error.message)})
                 })
                 .catch((error) => {
                     console.log({name: nameInputString, comment: commentInputString})

@@ -46,11 +46,11 @@ export default function UploadPage() {
     const isTitleValid = () => {
         if (videoTitle === "") {
             setVerifyTitle([false, "Title cannot be blank"]);
-            formRef.current.title.value= "";
+            formRef.current.title.value = "";
             return false;
         } else if (badWords.some((v) => videoTitle.includes(v))) {
             setVerifyTitle([false, "Clean up the language, bucko"]);
-            formRef.current.title.value= "";
+            formRef.current.title.value = "";
             return false;
         } else {
             setVerifyTitle([true, "Add a title to your video"]);
@@ -61,11 +61,11 @@ export default function UploadPage() {
     const isDescriptionValid = () => {
         if (videoTitle === "") {
             setVerifyDescription([false, "Description cannot be blank"]);
-            formRef.current.description.value= "";
+            formRef.current.description.value = "";
             return false;
         } else if (badWords.some((v) => videoDescription.includes(v))) {
             setVerifyDescription([false, "Clean up the language, bucko"]);
-            formRef.current.description.value= "";
+            formRef.current.description.value = "";
             return false;
         } else {
             setVerifyDescription([true, "Add a description to your video"]);
@@ -122,7 +122,10 @@ export default function UploadPage() {
                     setLoadClear(true);
                     setTimeout(() => {
                         navigate("/");
-                    },500);
+                    }, 500);
+                })
+                .catch((error) => {
+                    alert(error.message);
                 });
         }
     };
