@@ -11,7 +11,7 @@ import likeIconFilled from "../../../assets/images/thumb_up_FILL1_wght400_GRAD0_
 
 import axios from 'axios';
 
-// mouseover and mouseout events are for hovering over the delete button
+// mouseover and mouseout events are for hovering over the delete or like button
 function PostedComment({comment, id, name, timestamp, likes, BASE_URL, videoId, setCommentsState}) {
     const [likesCount, setLikesCount] = useState(Number(likes));
     // ref used to point to img to change src

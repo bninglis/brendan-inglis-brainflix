@@ -8,12 +8,7 @@ import Next from "../../components/Next/Next";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import PageLoad from "../../components/PageLoad/PageLoad";
-import { useRef, useState, useEffect } from "react";
-// "687ee809-6094-46bd-9c3f-d3e742be9ada"
-// "f932b35e-f101-4b4d-8f90-995984602b7f"
-// "72effae1-4373-4c60-9d76-3398551ed7c5"
-// "801e42e5-0bec-4074-9343-7850bde3319e"
-// "adb9317e-65d9-4dbd-88a3-c2e8fe00b0a6"
+import { useState, useEffect } from "react";
 
 const BASE_URL = "http://localhost:8080";
 const API_KEY = "687ee809-6094-46bd-9c3f-d3e742be9ada";

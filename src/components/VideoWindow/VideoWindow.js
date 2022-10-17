@@ -46,7 +46,8 @@ function VideoWindow({ poster }) {
         }
     };
 
-    // adds all the buffered ranges together to show buffered percentage and then ooutputs to state
+    // originally I added all the buffered ranges together to show buffered percentage and then output that to the slider
+    // then I realised that no one cares how much of the video is buffered if it's at the end so I just output the first range
 
     // const updateBuffered = () => {
     //     if (videoRef.current?.buffered !== undefined) {
@@ -152,6 +153,7 @@ function VideoWindow({ poster }) {
                         >
                             <img src={fullscreenIcon} alt='fullscreen icon' />
                         </button>
+                        {/* Started working on the volume, found it wasn't working and realised I didn't have enough time to do a deep dive debug so I had to just scrap it */}
                         <button className='video__button video__button--volume'>
                             <img src={volumeIcon} alt='volume icon' />
                         </button>

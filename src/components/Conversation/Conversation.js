@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/styles.scss";
 import Comment from "./Comment/Comment";
 import "./Conversation.scss";
@@ -6,12 +6,12 @@ import PostedComment from "./PostedComment/PostedComment";
 
 function Conversation({ comments, videoId, BASE_URL, API_KEY }) {
     const [commentsState, setCommentsState] = useState(comments);
-    const [idUpdate, setIdUpdate] = useState(videoId);
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
+    useEffect(() => { 
+        window.scrollTo(0, 0);  // this component reliably triggers on every page mount so window.scrollTo() lives here
         setCommentsState(comments);
     }, [videoId, comments]);
+
     return (
         <div className='conversation'>
             <Comment

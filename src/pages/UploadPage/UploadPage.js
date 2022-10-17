@@ -44,8 +44,6 @@ export default function UploadPage() {
     };
 
     const isTitleValid = () => {
-        console.log("titleVerifier");
-        console.log(videoTitle);
         if (videoTitle === "") {
             setVerifyTitle([false, "Title cannot be blank"]);
             formRef.current.title.value= "";
@@ -86,7 +84,6 @@ export default function UploadPage() {
     };
 
     const isFormValid = () => {
-        console.log(isTitleValid(), isDescriptionValid(), isFileValid());
         if (isTitleValid() && isDescriptionValid() && isFileValid()) {
             return true;
         } else {
