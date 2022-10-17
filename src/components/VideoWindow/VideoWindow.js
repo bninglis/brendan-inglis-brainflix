@@ -5,11 +5,10 @@ import pauseIcon from "../../assets/images/pause.svg";
 import fullscreenIcon from "../../assets/images/fullscreen.svg";
 import volumeIcon from "../../assets/images/volume_up.svg";
 import videoFile from "../../assets/videos/test.mp4";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReactSlider from "react-slider";
-import Volume from "../Volume/Volume";
 
-// could not get the volume functions 
+// could not get the volume functions to work properly in the time available
 
 function VideoWindow({ poster }) {
     const videoRef = useRef();
@@ -20,21 +19,19 @@ function VideoWindow({ poster }) {
     const [bufferingTotal, setBufferingTotal] = useState(0);
     const [sliderValues, setSliderValues] = useState([0, 0]);
 
-    // const volumeRef = useRef();
-    // const [volumeValue, setVolumeValue] = useState(50);
-    // const [onChangeValue, setOnChangeValue] = useState(false);
-
-    // 
+    // formats time to strings for display
     const formatVideoTime = (time) => {
         return `${Math.floor(time / 60)}:${String(
             Math.floor(time % 60)
         ).padStart(2, "0")}`;
     };
 
+    // loads video duration from the metadata to the player
     const handleLoadedMetadata = () => {
         setDuration(videoRef.current.duration);
     };
 
+    // adds functionality to the play/pause button
     const playButton = (directive) => {
         if (directive === "play") {
             if (playState === false) {
@@ -49,22 +46,34 @@ function VideoWindow({ poster }) {
         }
     };
 
+    // adds all the buffered ranges together to show buffered percentage and then ooutputs to state
+
+    // const updateBuffered = () => {
+    //     if (videoRef.current?.buffered !== undefined) {
+    //         const bufferedTimeRanges = videoRef.current?.buffered;
+    //         const ranges = bufferedTimeRanges.length;
+    //         let totalBufferedTime = 0;
+    //         for (let i = 0; i < ranges; i++) {
+    //             totalBufferedTime =
+    //                 totalBufferedTime +
+    //                 (bufferedTimeRanges.end(i) - bufferedTimeRanges.start(i));
+    //         }
+    //         if (totalBufferedTime > bufferingTotal && !!totalBufferedTime) {
+    //             setBufferingTotal(totalBufferedTime);
+    //         }
+    //     }
+    // };
+
     const updateBuffered = () => {
         if (videoRef.current?.buffered !== undefined) {
             const bufferedTimeRanges = videoRef.current?.buffered;
-            const ranges = bufferedTimeRanges.length;
-            let totalBufferedTime = 0;
-            for (let i = 0; i < ranges; i++) {
-                totalBufferedTime =
-                    totalBufferedTime +
-                    (bufferedTimeRanges.end(i) - bufferedTimeRanges.start(i));
-            }
-            if (totalBufferedTime > bufferingTotal && !!totalBufferedTime) {
-                setBufferingTotal(totalBufferedTime);
-            }
+            setBufferingTotal(
+                bufferedTimeRanges.end(0) - bufferedTimeRanges.start(0)
+            );
         }
     };
 
+    // updates the slider to reflect the current time in the video and the percentage of the video buffered
     window.setInterval(() => {
         const newPlayhead = (videoRef.current?.currentTime / duration) * 100;
         updateBuffered();
@@ -72,6 +81,7 @@ function VideoWindow({ poster }) {
         setSliderValues([newPlayhead, newBuffer]);
     }, 1000);
 
+    // onChange handler allows for scrubbing the video
     const handleSliderChange = (e) => {
         let currentPlayhead =
             (sliderRef.current.state.value[0] / 100) * duration;
@@ -112,6 +122,8 @@ function VideoWindow({ poster }) {
                         <img src={playIcon} alt='play icon' ref={playImgRef} />
                     </button>
                     <div className='video__timeline'>
+                        {/* input range was nto working so used this package, probably other better options out there but I needed to start with something */}
+
                         <ReactSlider
                             ref={sliderRef}
                             className='vslider'
@@ -143,7 +155,6 @@ function VideoWindow({ poster }) {
                         <button className='video__button video__button--volume'>
                             <img src={volumeIcon} alt='volume icon' />
                         </button>
-                        {/* <Volume video={videoRef} /> */}
                     </div>
                 </div>
             </div>

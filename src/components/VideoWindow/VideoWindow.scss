@@ -167,6 +167,7 @@
             height: 0;
             top: 50%;
             transform: translateY(-50%);
+            pointer-events: none;
         }
     }
 
@@ -188,27 +189,3 @@
         }
     }
 }
-
-// .volume {
-//     height: auto;
-//     width: auto;
-//     overflow: hidden;
-//     transition: 0.5s;
-
-//     &__container {
-//         background-color: rgba($BRAIN_FLIX_DARK_BLACK, 0.75);
-//         width: 2.5rem;
-//         min-height: 8rem;
-//         position: absolute;
-//         bottom: 3.25rem;
-//         right: 1.25rem;
-//         border-radius: 1.625rem 1.625rem 0 0;
-//     }
-
-//     &__slider {
-//         height: auto;
-//         z-index: 50;
-//         position: absolute;
-//         width: auto;
-//     }
-// }

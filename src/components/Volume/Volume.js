@@ -1,14 +1,14 @@
-import ReactSlider from "react-slider";
-import { useRef } from "react";
-import "./Volume.scss";
-import Slider from "@mui/material/Slider";
+// import ReactSlider from "react-slider";
+// import { useRef } from "react";
+// import "./Volume.scss";
+// import Slider from "@mui/material/Slider";
 
 export default function Volume({ video }) {
-    const handleOnChange = (e) => {
-        video.volume = e.target.value;
-    };
+    // const handleOnChange = (e) => {
+    //     video.volume = e.target.value;
+    // };
 
-    const volumeRef = useRef();
+    // const volumeRef = useRef();
     return (
         <div>
             <div className='volume'>

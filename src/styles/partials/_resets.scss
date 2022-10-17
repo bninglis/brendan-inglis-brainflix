@@ -4,11 +4,17 @@
     box-sizing: border-box;
 }
 
-// body { 
-//     overflow: overlay; 
-// }
+//  these two resets allow window.scrollTo to function correctly
+html {
+    height: 100%;
+    overflow: auto;
+}
+body {
+    height: 100%;
+}
 
-ul, ol {
+ul,
+ol {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -19,15 +25,5 @@ ul, ol {
 
 a {
     text-decoration: inherit;
-    color:initial;
+    color: initial;
 }
-
-// .slider{
-//     -webkit-appearance: none;  /* Override default CSS styles */
-//     appearance: none;
-
-//     &::-webkit-slider-thumb {
-//         -webkit-appearance: none; /* Override default look */
-//         appearance: none;
-//     }
-// }
